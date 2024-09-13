@@ -2,12 +2,12 @@
 ARG TAG
 
 #=====================================
-FROM php:7.0.31-apache-stretch AS base
+FROM php:8.1-apache-bookworm AS base
 #=====================================
 
-LABEL maintainer="Marius Millea <mariusmillea@gmail.com>"
+LABEL maintainer="BoySanic <boysanic@0xa.pw>"
 
-# install packages 
+# install packages
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         cron \
@@ -15,10 +15,12 @@ RUN apt-get update \
         inotify-tools \
         libjpeg62-turbo-dev \
         libpng-dev \
-        libmariadbclient18 \
+        libmariadb3 \
+        libmariadb-dev \
         nano \
         openssl \
         python \
+        python3 \
         rsyslog \
         supervisor \
         vim-tiny \
@@ -26,6 +28,8 @@ RUN apt-get update \
     && wget https://github.com/bobthecow/psysh/releases/download/v0.10.9/psysh-v0.10.9.tar.gz -O - | tar xz -C /usr/bin \
     && chmod +x /usr/bin/psysh \
     && rm -rf /var/lib/apt/lists
+#lib
+RUN ln -s /usr/lib/x86_64-linux-gnu/libmariadbclient.so /usr/lib/x86_64-linux-gnu/libmariadbclient.so.18
 
 # configure server
 RUN docker-php-ext-install mysqli \
@@ -51,9 +55,9 @@ FROM base AS base-b2d
 # install Docker client
 RUN curl -L http://get.docker.com/builds/Linux/x86_64/docker-1.10.3 > /usr/bin/docker \
     && chmod +x /usr/bin/docker
-    
-    
-    
+
+
+
 #======================
 FROM base$TAG AS apache
 #======================
@@ -87,3 +91,13 @@ FROM apache AS apache-defaultargs
 
 # this triggers the ONBUILD directives using the default ARGs so we also get a
 # fully built example image
+#FROM boinc/server_apache:4.1.0-b2d@sha256:ed9e0e914bdc917b76da1cd1c246b9e492b3474108c96265dfdac15384fa43df
+
+COPY --chown=1000 makeproject-step3.sh /usr/bin
+
+# Install additional dependencies
+RUN apt-get update && apt-get install -y \
+    python-mysqldb \
+        tree \
+ && rm -rf /var/lib/apt/lists/* \
+ && apt-get clean

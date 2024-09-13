@@ -1,5 +1,5 @@
 #==================================
-FROM mariadb:10.3.8-bionic AS mysql
+FROM mariadb:lts-noble AS mysql
 #==================================
 
 ENV MYSQL_ALLOW_EMPTY_PASSWORD=yes

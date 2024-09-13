@@ -2,10 +2,10 @@
 ARG TAG
 
 #===============================
-FROM debian:stretch-slim AS base
+FROM debian:bookworm-slim AS base
 #===============================
 
-LABEL maintainer="Marius Millea <mariusmillea@gmail.com>"
+LABEL maintainer="BoySanic <boysanic@0xa.pw>"
 
 # install packages
 RUN apt-get update \
@@ -21,9 +21,9 @@ RUN apt-get update \
         m4 \
         make \
         mysql-client \
-        php7.0-cli \
-        php7.0-mysql \
-        php7.0-xml \
+        php8.1-cli \
+        php8.1-mysql \
+        php8.1-xml \
         pkg-config \
         python \
         python3 \
