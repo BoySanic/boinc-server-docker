@@ -33,7 +33,7 @@ cp -rfT --preserve=mode,ownership $PROJECT_ROOT $PROJECT_ROOT_DEST
 mv $PROJECT_ROOT ${PROJECT_ROOT}.orig
 ln -s $PROJECT_ROOT_DEST $PROJECT_ROOT
 cd $PROJECT_ROOT
-
+chmod +x $PROJECT_ROOT/bin/*
 
 # wait for MySQL server to start
 echo "Waiting for MySQL server to start..."
