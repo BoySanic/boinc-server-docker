@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the makeproject Docker image
+      run: docker build . --file images/makeproject/Dockerfile --tag boinc_makeproject:$(date +%s)
+    - name: Build the apache Docker image
+      run: docker build . --file images/apache/Dockerfile --tag boinc_apache:$(date +%s)
+    - name: Build the mysql Docker image  
+      run: docker build . --file images/mysql/Dockerfile --tag boinc_mysql:$(date +%s)
