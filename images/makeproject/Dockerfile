@@ -72,7 +72,8 @@ ONBUILD ENV BOINC_USER=$BOINC_USER \
 ONBUILD RUN adduser $BOINC_USER --disabled-password --gecos ""
 
 # ensure the project/secrets volumes have the right permissions when mounted
-ONBUILD RUN mkdir -p $PROJECT_ROOT.dst && chown -R $BOINC_USER:$BOINC_USER $PROJECT_ROOT.dst/.. && chmod -R 770 $PROJECT_ROOT.dst/..
+ONBUILD RUN mkdir -p $PROJECT_ROOT.dst && chown -R $BOINC_USER:$BOINC_USER $PROJECT_ROOT.dst/..
+
 ONBUILD RUN pip3 install mysqlclient --break-system-packages
 ONBUILD USER $BOINC_USER
 

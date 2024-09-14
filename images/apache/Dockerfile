@@ -77,6 +77,7 @@ ONBUILD ENV BOINC_USER=$BOINC_USER \
 
 # set up the non-root user who runs the dameons
 ONBUILD RUN adduser $BOINC_USER --disabled-password --gecos ""
+ONBUILD RUN chmod 0775 $HOME
 
 # so that www-data can read/write boinc server files
 ONBUILD RUN adduser www-data $BOINC_USER
