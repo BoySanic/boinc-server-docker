@@ -15,8 +15,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the makeproject Docker image
-      run: docker build images/makeproject --file Dockerfile --tag boysanic/boincserver_makeproject:latest
+      run: docker build images/makeproject --tag boysanic/boincserver_makeproject:latest
     - name: Build the apache Docker image
-      run: docker build images/apache/ --file Dockerfile --tag boysanic/boinc_apache:latest
+      run: docker build images/apache/ --tag boysanic/boinc_apache:latest
     - name: Build the mysql Docker image  
-      run: docker build images/mysql --file /Dockerfile --tag boysanic/boinc_mysql:latest
+      run: docker build images/mysql --tag boysanic/boinc_mysql:latest
