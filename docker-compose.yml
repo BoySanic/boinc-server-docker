@@ -6,16 +6,16 @@ volumes:
 
 services:
   mysql:
-    image: boinc/server_mysql:$VERSION$TAG$DEFAULTARGS
-    build: 
+    container_name: boinc_mysql
+    build:
       context: images/mysql
       target: mysql$DEFAULTARGS
     volumes:
       - "mysql:/var/lib/mysql"
 
   makeproject:
-    image: boinc/server_makeproject:$VERSION$TAG$DEFAULTARGS
-    build: 
+    container_name: boinc_mkproject
+    build:
       context: images/makeproject
       target: makeproject$DEFAULTARGS
       args:
@@ -31,8 +31,8 @@ services:
       - PROJECT
 
   apache:
-    image: boinc/server_apache:$VERSION$TAG$DEFAULTARGS
-    build: 
+    container_name: boinc_apache
+    build:
       context: images/apache
       target: apache$DEFAULTARGS
       args:
@@ -42,13 +42,13 @@ services:
     hostname: $PROJECT
     depends_on:
       - mysql
-    volumes: 
+    volumes:
       - "project:$PROJECT_ROOT"
       - "results:/results"
       - "secrets:/run/secrets"
       - "/dev/null:/run/secrets/keys/code_sign_private"
       - "/var/run/docker.sock:/var/run/docker.sock"
-    ports: 
+    ports:
       - "80:80"
     tty: true
     environment:
