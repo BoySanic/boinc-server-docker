@@ -15,4 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: 
+           docker build . --file images/makeproject/Dockerfile --tag boinc_makeproject:$(date +%s)
+           docker build . --file images/apache/Dockerfile --tag boinc_apache:$(date +%s)
+           docker build . --file images/mysql/Dockerfile --tag boinc_mysql:$(date +%s)
