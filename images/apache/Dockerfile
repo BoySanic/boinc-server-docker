@@ -2,7 +2,7 @@
 ARG TAG
 
 #=====================================
-FROM php:8.2-apache-bookworm AS base
+FROM php:8.4-apache-trixie AS base
 #=====================================
 
 LABEL maintainer="BoySanic <boysanic@0xa.pw>"

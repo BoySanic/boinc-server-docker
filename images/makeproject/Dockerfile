@@ -2,7 +2,7 @@
 ARG TAG
 
 #===============================
-FROM debian:bookworm-slim AS base
+FROM debian:trixie-slim AS base
 #===============================
 
 LABEL maintainer="BoySanic <boysanic@0xa.pw>"
@@ -19,21 +19,23 @@ RUN apt-get update \
         libcurl4-gnutls-dev \
         default-libmysqlclient-dev \
         libssl-dev \
+        libzip-dev \
         m4 \
         make \
+        nlohmann-json3-dev \
         default-mysql-client \
         pkg-config \
         python-is-python3 \
         python3 \
         python3-pip \
-        python3-dev
-
+        python3-dev \
+        python3-distutils-extra
 #RUN curl -sSL https://packages.sury.org/php/README.txt | bash -x
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        php8.2-cli \
-        php8.2-mysql \
-        php8.2-xml \
+        php8.4-cli \
+        php8.4-mysql \
+        php8.4-xml \
     && rm -rf /var/lib/apt/lists
 
 
